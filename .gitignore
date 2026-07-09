@@ -1,0 +1,26 @@
+# Secrets / env
+docker-timur/.env
+*.env
+!*.env.example
+
+# Auth service runtime data (SQLite DB, backups)
+docker-timur/auth/data/*.db
+docker-timur/auth/data/*.db-journal
+docker-timur/auth/data/*.db.bak
+
+# Python
+__pycache__/
+*.pyc
+
+# R / Shiny
+backend/app_cache/
+.Rhistory
+.RData
+.Rproj.user/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+
+# Local tool settings
+.claude/settings.local.json
