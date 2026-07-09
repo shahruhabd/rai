@@ -1,12 +1,12 @@
 # Secrets / env
-docker-timur/.env
+docker-rai/.env
 *.env
 !*.env.example
 
 # Auth service runtime data (SQLite DB, backups)
-docker-timur/auth/data/*.db
-docker-timur/auth/data/*.db-journal
-docker-timur/auth/data/*.db.bak
+docker-rai/auth/data/*.db
+docker-rai/auth/data/*.db-journal
+docker-rai/auth/data/*.db.bak
 
 # Python
 __pycache__/

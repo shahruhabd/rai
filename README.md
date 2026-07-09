@@ -1,4 +1,4 @@
-# Timur Project
+# RAI Project
 
 R/Shiny-приложение **ares** (PD-модель / скоринг на `randomForest`) плюс вспомогательный Flask-сервис **auth** (LDAP-логин и дашборд аналитики посещений).
 
@@ -18,7 +18,7 @@ R/Shiny-приложение **ares** (PD-модель / скоринг на `ra
 Требования: Docker Desktop (Windows/Mac/Linux), 4+ GB свободной памяти.
 
 ```bash
-cd docker-timur
+cd docker-rai
 docker compose up -d --build
 ```
 
@@ -56,17 +56,17 @@ IDM_USER=...
 IDM_PASS=...
 ```
 
-`docker-timur/.env` уже содержит `IDM_*` значения, но они не подключены к контейнеру — их нужно явно прописать в `environment` или добавить `env_file: .env` в `docker-compose.yml`. Файл `.env` содержит реальные пароли и **не должен коммититься в git** (уже добавлен в `.gitignore`).
+`docker-rai/.env` уже содержит `IDM_*` значения, но они не подключены к контейнеру — их нужно явно прописать в `environment` или добавить `env_file: .env` в `docker-compose.yml`. Файл `.env` содержит реальные пароли и **не должен коммититься в git** (уже добавлен в `.gitignore`).
 
 ## Структура проекта
 
 ```
-timur-project/
+rai-project/
 ├── backend/                     # R/Shiny-приложение "ares"
 │   ├── app.R                    # основной код приложения
 │   └── rf_pd_model.rds          # обученная модель (randomForest)
 │
-└── docker-timur/
+└── docker-rai/
     ├── docker-compose.yml       # сервисы ares-ai + auth
     ├── Dockerfile                # образ ares-ai (rocker/shiny-verse)
     ├── .env                      # секреты IDM (не в git)
