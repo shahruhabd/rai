@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Вход — R-AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: 22px;
+      color: #111827;
+    }
+    label {
+      display: block;
+      margin: 10px 0 4px;
+      color: #374151;
+      font-weight: 600;
+      text-align: left;
+    }
+    input {
+      width: 90%;               /* уменьшил ширину */
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #f9fafb;
+    }
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px 14px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+    }
+    button.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    button .spinner {
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    .err {
+      background: #fee2e2;
+      color: #7f1d1d;
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .hint {
+      color: #6b7280;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Вход в R-AI</h1>
+    {% if error %}<div class="err">{{ error }}</div>{% endif %}
+    <form method="post" action="/login" onsubmit="startLoading(this)">
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      <label>Логин</label>
+      <input type="text" name="username" autofocus required>
+      <label>Пароль</label>
+      <input type="password" name="password" required>
+      <button type="submit" id="loginBtn">Войти</button>
+    </form>
+  </div>
+  <script>
+    function startLoading(form){
+      const btn = form.querySelector('#loginBtn');
+      btn.classList.add('loading');
+      btn.innerHTML = 'Входим <span class="spinner"></span>';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  ares-ai:
+    build:
+      context: ..
+      dockerfile: docker-rai/Dockerfile
+    container_name: ares-ai
+    ports:
+      - "0.0.0.0:8045:3838"
+    environment:
+      - TZ=Asia/Almaty
+    restart: unless-stopped
+
+    volumes:
+      - ../backend:/srv/shiny-server/ares
+    expose:
+      - "3838"
+
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: r-ai-auth
+    environment:
+      - FLASK_SECRET=change_me_please
+      - COOKIE_SECURE=0
+    # during development mount local app and templates so changes apply without rebuild
+    volumes:
+      - ./auth/app.py:/app/app.py:ro
+      - ./auth/templates:/app/templates:ro
+      - ./auth/requirements.txt:/app/requirements.txt:ro
+    restart: unless-stopped
+    expose:
+      - "5000"
+    ports:
+      - "0.0.0.0:5000:5000"
